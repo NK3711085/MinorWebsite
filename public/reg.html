@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Responsive Registration Form</title>
+    <meta name="viewport" content="width=device-width,
+      initial-scale=1.0"/>
+    <link rel="stylesheet" href= "css/stylereg.css"/>
+    
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="form-title">Registration</h1>
+      <form action="/register" method="post" onsubmit="return validateForm()">
+        <div class="main-user-info">
+          <div class="user-input-box">
+            <label for="firstName">First Name</label>
+            <input type="text " required
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Enter First Name"/>
+          </div>
+          <div class="user-input-box">
+            <label for="lastName">Last Name</label>
+            <input type="text" required
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Enter Last Name"/>
+          </div>
+          <div class="user-input-box">
+            <label for="email">Email</label>
+            <input type="email" required
+                    id="email"
+                    name="email"
+                    placeholder="Enter Email"/>
+          </div>
+          <div class="user-input-box">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" required
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Enter Phone Number"/>
+          </div>
+          <div class="user-input-box">
+            <label for="password">Password</label>
+            <input type="password" required
+                    id="password"
+                    name="password"
+                    placeholder="Enter Password"/>
+          </div>
+          <div class="user-input-box">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" required
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"/>
+          </div>
+        </div>
+        <div class="gender-category">
+          <input type="radio" name="gender" id="male" value="Male">
+          <label for="male">Male</label>
+
+          <input type="radio" name="gender" id="female" value="Female">
+          <label for="female">Female</label>
+
+          <input type="radio" name="gender" id="other" value="Other">
+          <label for="other">Other</label>
+        </div>
+
+        <div class="form-submit-btn">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </body>
+  <script>
+function validateForm() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phoneNumber').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const confirmPassword = document.getElementById('confirmPassword').value.trim();
+  const genderMale = document.getElementById('male').checked;
+  const genderFemale = document.getElementById('female').checked;
+  const genderOther = document.getElementById('other').checked;
+
+
+  const nameRegex = /^[A-Za-z]+$/;
+  if (!nameRegex.test(firstName)) {
+    alert("❗ First name should contain only letters.");
+    return false;
+  }
+
+  if (!nameRegex.test(lastName)) {
+    alert("❗ Last name should contain only letters.");
+    return false;
+  }
+
+  if (!/^\d{10}$/.test(phone)) {
+    alert("❗ Phone number must be 10 digits.");
+    return false;
+  }
+
+
+  if (password.length < 6) {
+    alert("❗ Password must be at least 6 characters.");
+    return false;
+  }
+
+  if (password !== confirmPassword) {
+    alert("❗ Password and Confirm Password must match.");
+    return false;
+  }
+
+  if (!genderMale && !genderFemale && !genderOther) {
+    alert("❗ Please select a gender.");
+    return false;
+  }
+
+  alert("Done,,, please go back....");
+  return true;
+}
+
+
+
+</script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('success') === '1') {
+    alert('✅ DONE! You have registered successfully.');
+    window.location.href = '/';
+  }
+</script>
+
+
+</html>
+
+
+
+
